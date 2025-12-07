@@ -8,13 +8,13 @@ describe('name/price form', () => {
   let browser = null;
   let page = null;
   let server = null;
-  const baseUrl = 'http://localhost:9000'; // Проверьте порт!
+  const baseUrl = 'http://localhost:9000'; 
 
   beforeAll(async () => {
-    // 1. Запускаем сервер
+   
     server = fork(`${__dirname}/e2e.server.js`);
 
-    // 2. Ждём сообщения от сервера с таймаутом
+ 
     const serverReady = new Promise((resolve, reject) => {
       const timeout = setTimeout(() => {
         reject(new Error('Server did not respond in time'));
@@ -35,20 +35,20 @@ describe('name/price form', () => {
 
     await serverReady;
 
-    // 3. Запускаем Puppeteer с флагами для CI/CD
+   
     browser = await puppeteer.launch({
       headless: true, // Всегда true в CI
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
         '--disable-dev-shm-usage',
-        '--single-process', // Дополнительно для стабильности в CI
+        '--single-process', 
       ],
       timeout: 30000,
     });
 
     page = await browser.newPage();
-    // Устанавливаем размер окна (важно для тестов UI)
+    
     await page.setViewport({ width: 1280, height: 720 });
   }, 30000);
 
@@ -56,40 +56,40 @@ describe('name/price form', () => {
     try {
       if (browser) await browser.close();
     } catch (err) {
-      // Убрали console.error — теперь просто игнорируем ошибку закрытия браузера
+      
     }
 
     if (server) {
       server.kill();
-      // Убрали console.log — теперь не отслеживаем завершение процесса
+      
     }
   });
 
   test('click on the toggler should show popover', async () => {
     await page.goto(baseUrl, {
-      waitUntil: 'domcontentloaded', // Более надёжный вариант
+      waitUntil: 'domcontentloaded', 
       timeout: 10000,
     });
 
-    // Проверяем, что элемент существует
+    
     const toggler = await page.$('#toggler');
     if (!toggler) {
       throw new Error('Element #toggler not found on the page');
     }
 
-    // Кликаем
+    
     await toggler.click();
 
-    // Ждём появления попавера
+    
     await page.waitForSelector('div.popover', {
       visible: true,
       timeout: 5000,
     });
 
-    // Повторный клик для скрытия
+    
     await toggler.click();
 
-    // Ждём исчезновения попавера
+    
     await page.waitForFunction(() => !document.querySelector('div.popover'), { timeout: 5000 });
   }, 20000);
 });
