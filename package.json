@@ -18,9 +18,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/valentin-panov/"
+    "url": "https://github.com/InnaAlieva/ahj-5.11"
   },
-  "author": "Valentin Panov <valentin.panov@me.com>",
+  "author": "InnaAlieva",
   "license": "MIT",
   "dependencies": {
     "core-js": "^3.6.5"
