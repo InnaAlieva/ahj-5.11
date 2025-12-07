@@ -1,4 +1,5 @@
 import { fork } from 'child_process';
+
 const puppeteer = require('puppeteer');
 
 jest.setTimeout(30000);
@@ -49,7 +50,7 @@ describe('name/price form', () => {
   afterAll(async () => {
     try {
       if (browser) await browser.close();
-    } catch (err) {}
+    }
 
     if (server) {
       server.kill();
@@ -76,9 +77,7 @@ describe('name/price form', () => {
 
     await toggler.click();
 
-    await page.waitForFunction(
-      () => !document.querySelector('div.popover'),
-      { timeout: 5000 }
-    );
+    await page.waitForFunction(() => !document.querySelector('div.popover'), { timeout: 5000 });
+
   }, 20000);
 });
