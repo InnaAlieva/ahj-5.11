@@ -90,9 +90,6 @@ describe('name/price form', () => {
     await toggler.click();
 
     // Ждём исчезновения попавера
-    await page.waitForFunction(
-      () => !document.querySelector('div.popover'),
-      { timeout: 5000 }
-    );
+    await page.waitForFunction(() => !document.querySelector('div.popover'), { timeout: 5000 });
   }, 20000);
 });
