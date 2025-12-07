@@ -8,13 +8,10 @@ describe('name/price form', () => {
   let browser = null;
   let page = null;
   let server = null;
-  const baseUrl = 'http://localhost:9000'; 
+  const baseUrl = 'http://localhost:9000';
 
-  beforeAll(async () => {
-   
-    server = fork(`${__dirname}/e2e.server.js`);
-
- 
+  beforeAll(async () => {   
+    server = fork(`${__dirname}/e2e.server.js`); 
     const serverReady = new Promise((resolve, reject) => {
       const timeout = setTimeout(() => {
         reject(new Error('Server did not respond in time'));
@@ -34,7 +31,6 @@ describe('name/price form', () => {
     });
 
     await serverReady;
-
    
     browser = await puppeteer.launch({
       headless: true, // Всегда true в CI
@@ -70,25 +66,20 @@ describe('name/price form', () => {
       waitUntil: 'domcontentloaded', 
       timeout: 10000,
     });
-
     
     const toggler = await page.$('#toggler');
     if (!toggler) {
       throw new Error('Element #toggler not found on the page');
     }
-
     
     await toggler.click();
-
     
     await page.waitForSelector('div.popover', {
       visible: true,
       timeout: 5000,
     });
 
-    
     await toggler.click();
-
     
     await page.waitForFunction(() => !document.querySelector('div.popover'), { timeout: 5000 });
   }, 20000);
