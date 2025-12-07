@@ -79,9 +79,6 @@ describe('name/price form', () => {
 
     await toggler.click();
 
-    await page.waitForFunction(
-      () => !document.querySelector('div.popover'),
-      { timeout: 5000 }
-    );
+    await page.waitForFunction(() => !document.querySelector('div.popover'), { timeout: 5000 });
   }, 20000);
 });
