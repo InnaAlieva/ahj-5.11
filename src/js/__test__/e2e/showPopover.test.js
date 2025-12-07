@@ -56,13 +56,12 @@ describe('name/price form', () => {
     try {
       if (browser) await browser.close();
     } catch (err) {
-      console.error('Error closing browser:', err);
+      // Убрали console.error — теперь просто игнорируем ошибку закрытия браузера
     }
 
     if (server) {
       server.kill();
-      // Дополнительно: ждём завершения процесса
-      server.on('exit', () => console.log('Server process terminated'));
+      // Убрали console.log — теперь не отслеживаем завершение процесса
     }
   });
 
@@ -91,9 +90,9 @@ describe('name/price form', () => {
     await toggler.click();
 
     // Ждём исчезновения попавера
-   await page.waitForFunction(
-    () => !document.querySelector('div.popover'),
-    { timeout: 5000 }
-   );
+    await page.waitForFunction(
+      () => !document.querySelector('div.popover'),
+      { timeout: 5000 }
+    );
   }, 20000);
 });
