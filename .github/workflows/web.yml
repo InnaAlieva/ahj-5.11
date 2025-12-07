@@ -36,7 +36,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-     - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 22.14.0
           cache: 'yarn'
@@ -44,7 +44,7 @@ jobs:
       - run: yarn test
 
   build:
-    needs: [eslint]
+    needs: [eslint, test]
 
     environment:
       name: github-pages
