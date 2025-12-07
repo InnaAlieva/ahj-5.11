@@ -30,7 +30,7 @@ export default class ShowPopover {
     }
     const popoverContent = {
       header: `Popover title`,
-      body: `Popover was called from the element with type="${target.type}" and id="${target.id}"`,
+      body: `And here's some amazing content. It's very engaging. Right?`,
     };
     this.popover = addPopover(popoverContent);
     target.offsetParent.appendChild(this.popover);
