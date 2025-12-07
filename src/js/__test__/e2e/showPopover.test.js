@@ -50,6 +50,8 @@ describe('name/price form', () => {
   afterAll(async () => {
     try {
       if (browser) await browser.close();
+    } catch (err) {
+      // Игнорируем ошибку закрытия браузера
     }
 
     if (server) {
@@ -77,7 +79,9 @@ describe('name/price form', () => {
 
     await toggler.click();
 
-    await page.waitForFunction(() => !document.querySelector('div.popover'), { timeout: 5000 });
-
+    await page.waitForFunction(
+      () => !document.querySelector('div.popover'),
+      { timeout: 5000 }
+    );
   }, 20000);
 });
